@@ -1,2 +1,4 @@
+import {$, jquery} from 'jquery';
+
 
 
