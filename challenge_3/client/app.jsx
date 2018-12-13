@@ -6,40 +6,50 @@ class App extends React.Component {
     super(props);
     this.state = {
       step: 0,
+      fieldValues: [
+        {
+          name: null,
+          email: null,
+          password: null },
+        {
+          address: null,
+          city: null,
+          state: null,
+          zipcode: null,
+          phone: null },
+        {
+          card: null,
+          expiry: null,
+          cvv: null,
+          billingZipcode: null
+        }]
     }
-    // let fieldValues = [
-    //   {
-    //     name: null,
-    //     email: null,
-    //     password: null },
-    //   {
-    //     address: null,
-    //     city: null,
-    //     state: null,
-    //     zipcode: null,
-    //     phone: null },
-    //   {
-    //     card: null,
-    //     expiry: null,
-    //     cvv: null,
-    //     zipcode: null
-    //   }];
+    this.handleClick = this.handleClick.bind(this);
   }
 
   renderSwitch(state) {
     switch(state.step) {
       case 0:
-        return <Homepage />
+        return <Homepage btn={this.handleClick}/>
       case 1:
-        return <Creation />
+        return <Creation btn={this.handleClick}/>
       case 2:
-        return <Shipping />
+        return <Shipping btn={this.handleClick}/>
       case 3:
-        return <Billing />
+        return <Billing btn={this.handleClick}/>
       case 4:
-        return <Confirmation />
+        return <Confirmation btn={this.handleClick}/>
     }
   }
+
+  handleClick(e) {
+    e.preventDefault()
+    this.setState(state => {
+      let newState = state.step + 1;
+      return {step: newState};
+    })
+  }
+
   render() {
     return (
       <div>
@@ -53,73 +63,79 @@ const Homepage = (props) => {
   return (
     <div>
       <h1>hello!!</h1>
-      <button>Checkout</button>
+      <button onClick={props.btn}>Begin Checkout</button>
     </div>
   )
 }
 
 const Creation = (props) => {
   return (
-    <form>
-      <label> name
-        <input></input>
+    <form onSubmit={props.btn}>
+      <label> name:
+        <input type="text" />
       </label>
       <br />
-      <label> email
-        <input></input>
+      <label> email:
+        <input type="email" />
       </label>
       <br />
-      <label> password
-        <input></input>
+      <label> password:
+        <input type="password" />
       </label>
+      <br />
+      <button>Continue to Shipping</button>
     </form>
   )
 }
 
 const Shipping = (props) => {
   return (
-    <form>
-      <label> address
-        <input></input>
+    <form onSubmit={props.btn}>
+      <label> address:
+        <input type="text" />
       </label>
       <br />
-      <label> city
-        <input></input>
+      <label> city:
+        <input type="text" />
       </label>
       <br />
-      <label> state
-        <input></input>
+      <label> state:
+        <input type="text" />
       </label>
       <br />
-      <label> zipcode
-        <input></input>
+      <label> zipcode:
+        <input type="text" />
       </label>
       <br />
-      <label> phone
-        <input></input>
+      <label> phone:
+        <input type="text" />
       </label>
+      <br />
+      <button >Continue to Billing</button>
     </form>
   )
 }
 
 const Billing = (props) => {
   return (
-    <form>
-      <label> card #
-        <input></input>
+    <form onSubmit={props.btn}>
+      <label> card #:
+        <input />
       </label>
       <br />
-      <label> expiry date
-        <input></input>
+      <label> expiry date:
+        <input />
       </label>
       <br />
-      <label> CVV
-        <input></input>
+      <label> CVV:
+        <input />
       </label>
       <br />
-      <label> zipcode
-        <input></input>
+      <label> zipcode:
+        <input />
       </label>
+      <br />
+      <button>Continue to Confirmation</button>
     </form>
   )
 }
@@ -128,7 +144,7 @@ const Confirmation = (props) => {
   return (
   <div>
     <span></span>
-    <button>Complete Purchase</button>
+    <button>Complete Purchase </button>
   </div>
   )
 }
