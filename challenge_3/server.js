@@ -1,12 +1,12 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const app = express();
 const path = require('path');
 const port = 3000;
+const mongoose = require('./db/mongodb.js')
+
+
 
 app.use(express.static(path.join(__dirname, 'public')));
-
-// app.render('server');
 
 app.get('/', (req, res) => {
   // res.send()
